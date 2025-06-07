@@ -13,13 +13,14 @@ El proyecto viene con una base de datos SQL Server mediante devcontainters, pero
  - Clonar el respositorio
  - Migrar la base de datos con `dotnet ef database update`
     - Es posible que requiera restaurar las tools con `dotnet tool restore` para poder usar `dotnet ef`
+    - Es importante que la consola de comandos se encuentre en la carpeta `TodoApi` para hacer la migración.
 
 ## Iniciar Proyecto
 
-Para iniciar el proyecto, asegúrate de tener instalado [.NET SDK](https://dotnet.microsoft.com/download) y luego desde la raiz del proyecto ejecuta:
+Para iniciar el proyecto, asegurarse de tener instalado [.NET SDK](https://dotnet.microsoft.com/download) y luego desde la raiz del proyecto ejecutar:
 
-`dotnet run --project TodoApi`
-`dotnet run --project McpServer`
+`dotnet run --project TodoApi` y 
+`dotnet run --project McpServer` en consolas separadas.
 
 ## Conectar con Claude Desktop
 
@@ -44,4 +45,4 @@ El proyecto deberia funcionar para cualquier cliente MCP pero ha sido testeado c
         }
     }
     ```
- - Guardar el archivo y reiniciar la Claude Desktop (asegurarse de tener el proyecto corriendo antes de reiniciarla).
+ - Guardar el archivo y reiniciar Claude Desktop (asegurarse de tener el proyecto corriendo antes de reiniciar).
