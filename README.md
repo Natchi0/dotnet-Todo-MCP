@@ -1,40 +1,47 @@
-# dotnet-interview / TodoApi
+# dotnet-Todo-MCP
 
-[![Open in Coder](https://dev.crunchloop.io/open-in-coder.svg)](https://dev.crunchloop.io/templates/fly-containers/workspace?param.Git%20Repository=git@github.com:crunchloop/dotnet-interview.git)
+API base extraida desde el proyecto [dotnet-interview](https://github.com/crunchloop/dotnet-interview) de Crunchloop.
 
-This is a simple Todo List API built in .NET 8. This project is currently being used for .NET full-stack candidates.
+API TodoList y servidor MCP para comunicar la api con clientes MCP (Testeado con Claude Desktop).
 
-## Database
+## Base de Datos
 
-The project comes with a devcontainer that provisions a SQL Server database. If you are not going to use the devcontainer, make sure to provision a SQL Server database and
-update the connection string.
+El proyecto viene con una base de datos SQL Server mediante devcontainters, pero lo mejor es usar una propia ya que abrir el proyecto con devcontainer complica la comunicacion con Claude Desktop. En el proyecto TodoApi se encuentra el archivo `appsettings.json` donde se puede configurar la cadena de conexión a la base de datos.
 
-## Build
+## Instalación
 
-To build the application:
+ - Clonar el respositorio
+ - Migrar la base de datos con `dotnet ef database update`
+    - Es posible que requiera restaurar las tools con `dotnet tool restore` para poder usar `dotnet ef`
 
-`dotnet build`
+## Iniciar Proyecto
 
-## Run the API
-
-To run the TodoApi in your local environment:
+Para iniciar el proyecto, asegúrate de tener instalado [.NET SDK](https://dotnet.microsoft.com/download) y luego desde la raiz del proyecto ejecuta:
 
 `dotnet run --project TodoApi`
+`dotnet run --project McpServer`
 
-## Test
+## Conectar con Claude Desktop
 
-To run tests:
-
-`dotnet test`
-
-Check integration tests at: (https://github.com/crunchloop/interview-tests)
-
-## Contact
-
-- Martín Fernández (mfernandez@crunchloop.io)
-
-## About Crunchloop
-
-![crunchloop](https://crunchloop.io/logo-blue.png)
-
-We strongly believe in giving back :rocket:. Let's work together [`Get in touch`](https://crunchloop.io/contact).
+El proyecto deberia funcionar para cualquier cliente MCP pero ha sido testeado con Claude Desktop.
+ 
+ - Buscar el archivo `claude_desktop_config`
+    - Desde la app, ir a `Configuración` > `Desarrollador` > `Editar configuración`
+ - Agregar el servidor, se debería ver así:
+    ```
+    {
+        "mcpServers":{
+            "TodoApi":{
+                "type": "stdio",
+                "command": "dotnet",
+                "args":[
+                    "run",
+                    "--project",
+                    "C:\\Ruta\\Absoluta\\Del\\Proyecto\\McpServer.csproj",
+                    "--no-build"
+                ]
+            }
+        }
+    }
+    ```
+ - Guardar el archivo y reiniciar la Claude Desktop (asegurarse de tener el proyecto corriendo antes de reiniciarla).
